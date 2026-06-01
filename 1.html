@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agro Negócio | Agro Forte, Futuro Sustentável</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Sora:wght@300;400;600&family=Merriweather:ital,wght@1,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --verde-escuro: #1a3a1f;
+      --verde-medio: #2d6a35;
+      --verde-claro: #4caf50;
+      --verde-lima: #8bc34a;
+      --dourado: #c9a84c;
+      --dourado-claro: #f0d080;
+      --terra: #7a4f2c;
+      --creme: #f5f0e8;
+      --branco: #fdfaf4;
+      --texto-escuro: #1a1a0e;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background-color: var(--verde-escuro);
+      color: var(--creme);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      background: rgba(20, 45, 20, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(140, 195, 74, 0.25);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--dourado-claro);
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--verde-lima); }
+
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+
+    .nav-links a {
+      color: var(--creme);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--verde-lima);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--verde-lima); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 20% 60%, rgba(77, 175, 80, 0.18) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 30%, rgba(201, 168, 76, 0.12) 0%, transparent 50%),
+        linear-gradient(160deg, #0d2010 0%, #1a3a1f 50%, #0f2512 100%);
+    }
+
+    /* Grain overlay */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    /* Decorative stalks */
+    .hero-stalks {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 220px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      padding: 0 2rem;
+      pointer-events: none;
+    }
+
+    .stalk {
+      width: 3px;
+      background: linear-gradient(to top, var(--verde-medio), transparent);
+      border-radius: 2px;
+      opacity: 0.3;
+      animation: sway 4s ease-in-out infinite;
+    }
+
+    @keyframes sway {
+      0%, 100% { transform: rotate(-2deg); }
+      50% { transform: rotate(2deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      max-width: 820px;
+      padding: 0 2rem;
+      animation: fadeUp 1.2s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(140, 195, 74, 0.15);
+      border: 1px solid var(--verde-lima);
+      color: var(--verde-lima);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 0.4rem 1.2rem;
+      border-radius: 50px;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--branco);
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--dourado-claro);
+    }
+
+    .hero-sub {
+      font-family: 'Merriweather', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: rgba(245, 240, 232, 0.7);
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: var(--dourado);
+      color: var(--texto-escuro);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 1rem 2.4rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .hero-cta:hover { background: var(--dourado-claro); transform: translateY(-2px); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: rgba(245,240,232,0.4);
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, rgba(245,240,232,0.4), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      background: var(--dourado);
+      padding: 1.2rem 3rem;
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--texto-escuro);
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .stat-label { font-size: 0.75rem; font-weight: 600; line-height: 1.3; max-width: 100px; }
+
+    /* ── SECTIONS GENERAL ── */
+    section { padding: 5rem 2rem; }
+
+    .section-tag {
+      display: inline-block;
+      color: var(--verde-lima);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      color: var(--branco);
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-title em { color: var(--dourado-claro); font-style: italic; }
+
+    .section-body {
+      color: rgba(245,240,232,0.75);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    /* ── INTRO / MISSÃO ── */
+    .intro {
+      background: linear-gradient(135deg, #162a18 0%, #1e3d22 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro::after {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(140,195,74,0.07), transparent 70%);
+      pointer-events: none;
+    }
+
+    .intro-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .intro-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .agro-circle {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: conic-gradient(
+        var(--verde-medio) 0deg 130deg,
+        var(--verde-lima) 130deg 200deg,
+        var(--dourado) 200deg 260deg,
+        var(--terra) 260deg 310deg,
+        var(--verde-escuro) 310deg 360deg
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 80px rgba(77,175,80,0.25);
+      animation: spinSlow 20s linear infinite;
+    }
+
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .agro-inner {
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: #1a3a1f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: spinSlow 20s linear infinite reverse;
+    }
+
+    .agro-icon { font-size: 3.5rem; line-height: 1; }
+    .agro-inner-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--dourado-claro);
+      text-align: center;
+      letter-spacing: 1px;
+      margin-top: 0.3rem;
+    }
+
+    /* ── CURIOSIDADES / CARDS ── */
+    .curiosidades {
+      background: #0f2512;
+    }
+
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-header .section-body { margin: 0 auto; text-align: center; }
+
+    .cards-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .card {
+      background: linear-gradient(145deg, #1e3d22, #162a18);
+      border: 1px solid rgba(140,195,74,0.2);
+      border-radius: 12px;
+      padding: 2.2rem;
+      transition: transform 0.35s, border-color 0.35s, box-shadow 0.35s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--card-accent, var(--verde-lima));
+      border-radius: 12px 12px 0 0;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(140,195,74,0.5);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+
+    .card-emoji { font-size: 2.8rem; margin-bottom: 1rem; display: block; }
+
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--branco);
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    .card p { color: rgba(245,240,232,0.7); font-size: 0.9rem; line-height: 1.75; }
+
+    .card-tag {
+      display: inline-block;
+      margin-top: 1.2rem;
+      background: rgba(140,195,74,0.12);
+      color: var(--verde-lima);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      border: 1px solid rgba(140,195,74,0.3);
+    }
+
+    /* ── SOJA DESTAQUE ── */
+    .soja-section {
+      background: linear-gradient(160deg, #1e3d22 0%, #0d2010 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .soja-section::before {
+      content: 'SOJA';
+      position: absolute;
+      font-family: 'Playfair Display', serif;
+      font-size: 18rem;
+      font-weight: 900;
+      color: rgba(140,195,74,0.04);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .soja-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+    }
+
+    .soja-facts {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .fact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: rgba(255,255,255,0.04);
+      border-left: 3px solid var(--dourado);
+      padding: 1rem 1.4rem;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .fact-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--dourado-claro);
+      line-height: 1;
+      min-width: 60px;
+    }
+
+    .fact-text { font-size: 0.88rem; line-height: 1.6; color: rgba(245,240,232,0.8); }
+    .fact-text strong { color: var(--branco); display: block; margin-bottom: 0.2rem; }
+
+    /* Soja visual */
+    .soja-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .bar-chart { display: flex; flex-direction: column; gap: 0.7rem; }
+
+    .bar-item { display: flex; align-items: center; gap: 1rem; }
+
+    .bar-label { font-size: 0.8rem; font-weight: 600; min-width: 80px; color: var(--creme); }
+
+    .bar-track {
+      flex: 1;
+      height: 28px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      padding-left: 0.7rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--texto-escuro);
+      animation: barGrow 1.5s ease forwards;
+      transform-origin: left;
+    }
+
+    @keyframes barGrow {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    .bar-fill.gold { background: linear-gradient(90deg, var(--dourado), var(--dourado-claro)); }
+    .bar-fill.green { background: linear-gradient(90deg, var(--verde-medio), var(--verde-lima)); }
+    .bar-fill.lime { background: linear-gradient(90deg, var(--verde-lima), #aedd6a); }
+    .bar-fill.terra { background: linear-gradient(90deg, var(--terra), #b07040); }
+
+    .chart-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--dourado-claro);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── PILARES SUSTENTAVEIS ── */
+    .pilares {
+      background: #0f2512;
+    }
+
+    .pilares-grid {
+      max-width: 1100px;
+      margin: 3rem auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(140,195,74,0.15);
+      border: 1px solid rgba(140,195,74,0.15);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .pilar {
+      background: #0f2512;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: background 0.3s;
+    }
+
+    .pilar:hover { background: #162a18; }
+
+    .pilar-icon {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: rgba(140,195,74,0.12);
+      border: 1px solid rgba(140,195,74,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 1.2rem;
+    }
+
+    .pilar h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--branco);
+      margin-bottom: 0.6rem;
+    }
+
+    .pilar p { font-size: 0.85rem; color: rgba(245,240,232,0.65); line-height: 1.7; }
+
+    /* ── QUOTE ── */
+    .quote-section {
+      background: var(--dourado);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    blockquote {
+      max-width: 800px;
+      margin: 0 auto;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-style: italic;
+      color: var(--texto-escuro);
+      line-height: 1.5;
+    }
+
+    blockquote cite {
+      display: block;
+      margin-top: 1rem;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.85rem;
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--verde-escuro);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0a1a0d;
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(140,195,74,0.15);
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--dourado-claro);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-logo span { color: var(--verde-lima); }
+
+    .footer-tagline {
+      color: rgba(245,240,232,0.4);
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: rgba(245,240,232,0.5);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--verde-lima); }
+
+    .footer-copy {
+      margin-top: 2rem;
+      color: rgba(245,240,232,0.25);
+      font-size: 0.75rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .intro-grid, .soja-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .agro-circle { width: 240px; height: 240px; }
+      .agro-inner { width: 160px; height: 160px; }
+      .pilares-grid { grid-template-columns: 1fr; }
+      .stats-strip { gap: 2rem; }
+      .soja-section::before { font-size: 8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="nav-logo" href="#">Agro<span>Negócio</span></a>
+    <ul class="nav-links">
+      <li><a href="#intro">Sobre</a></li>
+      <li><a href="#curiosidades">Curiosidades</a></li>
+      <li><a href="#soja">Soja</a></li>
+      <li><a href="#sustentavel">Sustentável</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-stalks">
+      <div class="stalk" style="height:160px; animation-delay:0s;"></div>
+      <div class="stalk" style="height:200px; animation-delay:0.4s;"></div>
+      <div class="stalk" style="height:140px; animation-delay:0.8s;"></div>
+      <div class="stalk" style="height:190px; animation-delay:0.2s;"></div>
+      <div class="stalk" style="height:220px; animation-delay:1s;"></div>
+      <div class="stalk" style="height:170px; animation-delay:0.6s;"></div>
+      <div class="stalk" style="height:150px; animation-delay:1.2s;"></div>
+      <div class="stalk" style="height:200px; animation-delay:0.3s;"></div>
+      <div class="stalk" style="height:180px; animation-delay:0.9s;"></div>
+      <div class="stalk" style="height:210px; animation-delay:0.5s;"></div>
+    </div>
+    <div class="hero-content">
+      <span class="hero-badge">🌿 Brasil — Celeiro do Mundo</span>
+      <h1>Agro Forte,<br/><em>Futuro Sustentável</em></h1>
+      <p class="hero-sub">
+        Equilíbrio entre produção e meio ambiente.<br/>
+        O campo brasileiro alimenta o mundo com inovação, ciência e respeito à terra.
+      </p>
+      <a href="#curiosidades" class="hero-cta">
+        ⚡ Descubra o Agro do Brasil
+      </a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      scroll
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div>
+        <div class="stat-num">#1</div>
+        <div class="stat-label">Exportador de soja no mundo</div>
+      </div>
+    </div>
+    <div class="stat-item">
+      <div>
+        <div class="stat-num">33%</div>
+        <div class="stat-label">Do PIB nacional vem do agronegócio</div>
+      </div>
+    </div>
+    <div class="stat-item">
+      <div>
+        <div class="stat-num">220M</div>
+        <div class="stat-label">Hectares de área agricultável</div>
+      </div>
+    </div>
+    <div class="stat-item">
+      <div>
+        <div class="stat-num">5</div>
+        <div class="stat-label">Biomas únicos no território nacional</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="intro" id="intro">
+    <div class="intro-grid">
+      <div>
+        <span class="section-tag">Nossa Missão</span>
+        <h2 class="section-title">O Brasil <em>alimenta</em><br/>o planeta</h2>
+        <p class="section-body">
+          O agronegócio brasileiro é um dos pilares da economia nacional e uma potência global de alimentos. Com tecnologia de ponta, produtores inovadores e a diversidade dos biomas brasileiros, o campo une produtividade e responsabilidade ambiental como nenhum outro lugar no mundo.
+        </p>
+        <p class="section-body" style="margin-top:1rem;">
+          Aqui no <strong style="color:var(--verde-lima)">Agro Negócio</strong>, celebramos os fatos incríveis, as curiosidades fascinantes e os desafios sustentáveis do setor que move o Brasil.
+        </p>
+      </div>
+      <div class="intro-visual">
+        <div class="agro-circle">
+          <div class="agro-inner">
+            <span class="agro-icon">🌾</span>
+            <span class="agro-inner-text">Agro<br/>Brasil</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURIOSIDADES -->
+  <section class="curiosidades" id="curiosidades">
+    <div class="section-header">
+      <span class="section-tag">Você Sabia?</span>
+      <h2 class="section-title">Fatos <em>incríveis</em> do Agro</h2>
+      <p class="section-body">O campo brasileiro guarda histórias e números que vão te surpreender.</p>
+    </div>
+    <div class="cards-grid">
+
+      <div class="card" style="--card-accent: var(--dourado);">
+        <span class="card-emoji">🌱</span>
+        <h3>O Brasil tem a maior fronteira agrícola inexplorada do mundo</h3>
+        <p>O Cerrado brasileiro, com suas terras planas e bem distribuídas, representa ainda uma enorme reserva de expansão agrícola sustentável — e já foi transformado em uma das regiões mais produtivas do planeta graças à pesquisa da Embrapa.</p>
+        <span class="card-tag">Cerrado</span>
+      </div>
+
+      <div class="card" style="--card-accent: var(--verde-lima);">
+        <span class="card-emoji">🐄</span>
+        <h3>O rebanho bovino do Brasil supera a população humana</h3>
+        <p>Com mais de 220 milhões de cabeças de gado, o Brasil possui o maior rebanho comercial do mundo. Para cada brasileiro, há quase um boi. O país é o maior exportador de carne bovina há mais de 15 anos consecutivos.</p>
+        <span class="card-tag">Pecuária</span>
+      </div>
+
+      <div class="card" style="--card-accent: var(--terra);">
+        <span class="card-emoji">☕</span>
+        <h3>O Brasil produz café há mais de 200 anos</h3>
+        <p>O Brasil é o maior produtor e exportador de café do mundo há mais de 150 anos consecutivos. Minas Gerais sozinho produz mais café do que toda a Colômbia — o segundo maior produtor global.</p>
+        <span class="card-tag">Café</span>
+      </div>
+
+      <div class="card" style="--card-accent: var(--verde-claro);">
+        <span class="card-emoji">🚜</span>
+        <h3>Agricultura de Precisão: o campo virou laboratório</h3>
+        <p>Drones, sensores de solo, inteligência artificial e satélites monitoram plantações em tempo real. O produtor rural brasileiro moderno toma decisões baseadas em dados, reduzindo desperdício de água e insumos em até 40%.</p>
+        <span class="card-tag">Tecnologia</span>
+      </div>
+
+      <div class="card" style="--card-accent: var(--dourado-claro);">
+        <span class="card-emoji">🍬</span>
+        <h3>O Brasil é o maior produtor de açúcar e etanol do mundo</h3>
+        <p>A cana-de-açúcar brasileira abastece tanto a mesa quanto os postos de combustível. O etanol de cana é o biocombustível mais eficiente do planeta, reduzindo emissões de CO₂ em até 90% comparado à gasolina.</p>
+        <span class="card-tag">Cana-de-Açúcar</span>
+      </div>
+
+      <div class="card" style="--card-accent: var(--verde-medio);">
+        <span class="card-emoji">🐔</span>
+        <h3>O frango brasileiro voa para mais de 150 países</h3>
+        <p>A avicultura brasileira é referência mundial em sanidade e eficiência. O Brasil é o maior exportador de carne de frango do globo, com a proteína mais acessível e sustentável da indústria.</p>
+        <span class="card-tag">Avicultura</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SOJA -->
+  <section class="soja-section" id="soja">
+    <div class="soja-inner">
+      <div>
+        <span class="section-tag">A Rainha do Cerrado</span>
+        <h2 class="section-title">A Soja que <em>alimenta</em><br/>o mundo</h2>
+        <p class="section-body">
+          Nenhum grão transformou tanto o Brasil quanto a soja. De zero a líder mundial em menos de 50 anos — uma revolução científica, econômica e geográfica sem precedentes na história da agricultura.
+        </p>
+        <div class="soja-facts">
+          <div class="fact-item">
+            <div class="fact-num">1°</div>
+            <div class="fact-text">
+              <strong>Maior produtor do mundo</strong>
+              O Brasil ultrapassou os EUA em produção de soja em 2012 e nunca mais perdeu o posto.
+            </div>
+          </div>
+          <div class="fact-item">
+            <div class="fact-num">170M</div>
+            <div class="fact-text">
+              <strong>Toneladas por safra (2023/24)</strong>
+              Volume suficiente para encher 2,8 milhões de caminhões, que em fila percorreriam a Terra 70 vezes.
+            </div>
+          </div>
+          <div class="fact-item">
+            <div class="fact-num">R$280bi</div>
+            <div class="fact-text">
+              <strong>Em exportações anuais</strong>
+              A soja e seus derivados respondem por mais de 20% de toda a pauta exportadora brasileira.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="soja-visual">
+        <p class="chart-title">🌍 Maiores Produtores de Soja (2024)</p>
+        <div class="bar-chart">
+          <div class="bar-item">
+            <span class="bar-label">🇧🇷 Brasil</span>
+            <div class="bar-track">
+              <div class="bar-fill gold" style="width:95%">170 Mt</div>
+            </div>
+          </div>
+          <div class="bar-item">
+            <span class="bar-label">🇺🇸 EUA</span>
+            <div class="bar-track">
+              <div class="bar-fill green" style="width:75%">113 Mt</div>
+            </div>
+          </div>
+          <div class="bar-item">
+            <span class="bar-label">🇦🇷 Argentina</span>
+            <div class="bar-track">
+              <div class="bar-fill lime" style="width:40%">50 Mt</div>
+            </div>
+          </div>
+          <div class="bar-item">
+            <span class="bar-label">🇨🇳 China</span>
+            <div class="bar-track">
+              <div class="bar-fill terra" style="width:13%">20 Mt</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILARES SUSTENTÁVEIS -->
+  <section class="pilares" id="sustentavel">
+    <div style="max-width:1100px; margin:0 auto; text-align:center;">
+      <span class="section-tag">Equilíbrio</span>
+      <h2 class="section-title">Os Pilares do <em>Agro Sustentável</em></h2>
+      <p class="section-body" style="margin:0 auto;">
+        Produzir mais com menos é o mantra do campo moderno. O Brasil lidera em práticas que unem produtividade e preservação.
+      </p>
+    </div>
+    <div class="pilares-grid">
+      <div class="pilar">
+        <div class="pilar-icon">🌿</div>
+        <h4>Preservação Ambiental</h4>
+        <p>O Brasil protege 66% de seu território com vegetação nativa — mais que qualquer outra grande potência agrícola. O Código Florestal garante equilíbrio entre o campo e a floresta.</p>
+      </div>
+      <div class="pilar">
+        <div class="pilar-icon">💧</div>
+        <h4>Gestão da Água</h4>
+        <p>Sistemas de irrigação inteligente e monitoramento hídrico por satélite reduzem o consumo de água em lavouras. Técnicas como plantio direto protegem nascentes e evitam erosão do solo.</p>
+      </div>
+      <div class="pilar">
+        <div class="pilar-icon">🔬</div>
+        <h4>Inovação e Ciência</h4>
+        <p>A Embrapa desenvolve cultivares adaptadas ao clima tropical há 50 anos. O Brasil é pioneiro em fixação biológica de nitrogênio, reduzindo o uso de fertilizantes químicos em até 70%.</p>
+      </div>
+      <div class="pilar">
+        <div class="pilar-icon">☀️</div>
+        <h4>Energia Renovável</h4>
+        <p>O agronegócio lidera a transição energética com bioenergia da cana, biogás de dejetos animais e energia solar fotovoltaica em propriedades rurais. O campo é o maior gerador de energia limpa do país.</p>
+      </div>
+      <div class="pilar">
+        <div class="pilar-icon">🤝</div>
+        <h4>Inclusão Social</h4>
+        <p>Mais de 10 milhões de empregos diretos no campo. A agricultura familiar produz 70% dos alimentos que chegam à mesa do brasileiro, fortalecendo comunidades rurais e a soberania alimentar.</p>
+      </div>
+      <div class="pilar">
+        <div class="pilar-icon">📡</div>
+        <h4>Agro Digital</h4>
+        <p>Conectividade rural, blockchain para rastreabilidade, IA para previsão de pragas e apps de gestão estão transformando o produtor rural em um empreendedor digital do século 21.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <div class="quote-section">
+    <blockquote>
+      "O agronegócio brasileiro não é só a força que move nossa economia — é a prova de que ciência, natureza e trabalho podem andar juntos."
+      <cite>— Agro Negócio · Brasil</cite>
+    </blockquote>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Agro<span>Negócio</span></div>
+    <p class="footer-tagline">Agro Forte · Futuro Sustentável · Brasil</p>
+    <ul class="footer-links">
+      <li><a href="#intro">Sobre</a></li>
+      <li><a href="#curiosidades">Curiosidades</a></li>
+      <li><a href="#soja">Soja</a></li>
+      <li><a href="#sustentavel">Sustentável</a></li>
+    </ul>
+    <p class="footer-copy">© 2025 Agro Negócio · Todos os direitos reservados</p>
+  </footer>
+
+</body>
+</html>
